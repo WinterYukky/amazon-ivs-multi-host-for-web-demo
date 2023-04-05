@@ -1,8 +1,8 @@
 {
-  "name": "ivs-multiple-hosts-web-example",
+  "name": "amazon-ivs-multi-host-for-web-demo",
   "version": "0.1.0",
   "bin": {
-    "ivs-multiple-hosts-web-example": "bin/ivs-multiple-hosts-web-example.js"
+    "amazon-ivs-multi-host-for-web-demo": "bin/amazon-ivs-multi-host-for-web-demo.js"
   },
   "scripts": {
     "build": "tsc",

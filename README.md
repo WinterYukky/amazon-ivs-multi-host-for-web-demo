@@ -4,7 +4,7 @@ This project is a demonstration application to try out Amazon IVS multiple hosts
 
 ![Image](./images/website-overview.png)
 
-## What is Amazon IVS multiple hosts
+## What is Amazon IVS Multiple Hosts
 
 > Amazon Interactive Video Service (IVS) enables developers to build applications that combine video from multiple participants into one live stream. A stage is a virtual space where participants can exchange audio and video in real time. You can then broadcast a stage to channels to reach a larger audience, and you can build applications where audience members can be brought "on stage" to contribute to the live conversation.
 

@@ -10,10 +10,8 @@ const nowPlaying = $ref(false);
 <template>
   <header class="container" style="padding-top: 3.5em">
     <hgroup>
-      <h1>Amazon IVS multiple host demo</h1>
-      <h2>
-        A website where you can try out the Amazon IVS multiple host demo.
-      </h2>
+      <h1>Amazon IVS Multi-host for Web demo</h1>
+      <h2>A website where you can try out the Amazon IVS Multi-host demo.</h2>
     </hgroup>
   </header>
   <main class="container">

@@ -8,7 +8,7 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { execSync } from "child_process";
 
-export class IvsMultipleHostsWebExampleStack extends cdk.Stack {
+export class AmazonIvsMultiHostForWebDemoStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 

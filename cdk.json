@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/ivs-multiple-hosts-web-example.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/amazon-ivs-multi-host-for-web-demo.ts",
   "watch": {
     "include": [
       "**"
