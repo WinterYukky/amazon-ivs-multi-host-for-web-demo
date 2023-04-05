@@ -19,6 +19,8 @@ This demo is built on AWS CDK and you can build the following demo environment b
 To set up a demonstration environment, run the following commands.
 
 ```bash
+git clone https://github.com/WinterYukky/amazon-ivs-mutiple-hosts-web-example.git
+cd amazon-ivs-mutiple-hosts-web-example
 npm install
 npm run cdk deploy
 ```
