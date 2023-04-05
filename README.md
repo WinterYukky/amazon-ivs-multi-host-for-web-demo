@@ -36,7 +36,7 @@ After deploy, you get following values.
 | URL                | Demo application URL.       |
 
 When you got the values, you should access the demo application and enter the channel ingest endpoint and User A's stage token, channel stream key as User A (broadcast host).
-Next, please enter the channel ingest endpoint and User B's stage token.
+Next, please enter the channel ingest endpoint and User B's stage token in another device.
 
 > Note that User B is not a broadcast host and should not enter a stream key.
 
