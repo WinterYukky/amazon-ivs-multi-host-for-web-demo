@@ -20,7 +20,7 @@ To set up a demonstration environment, run the following commands.
 
 ```bash
 git clone https://github.com/WinterYukky/amazon-ivs-muti-host-for-web-demo.git
-cd amazon-ivs-mutiple-hosts-web-example
+cd amazon-ivs-muti-host-for-web-demo
 npm install
 npm run cdk deploy
 ```
