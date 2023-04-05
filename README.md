@@ -1,6 +1,6 @@
-# Amazon IVS multiple hosts example
+# Amazon IVS multiple hosts web example
 
-This project is a demonstration application to try out Amazon IVS multiple hosts.
+This project is a demonstration application to try out Amazon IVS multiple hosts on static website.
 
 ![Image](./images/website-overview.png)
 
