@@ -8,7 +8,7 @@ import { S3Origin } from "aws-cdk-lib/aws-cloudfront-origins";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { execSync } from "child_process";
 
-export class IvsMultipleHostsExampleStack extends cdk.Stack {
+export class IvsMultipleHostsWebExampleStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -53,7 +53,11 @@ export class IvsMultipleHostsExampleStack extends cdk.Stack {
             image: cdk.DockerImage.fromRegistry("node"),
             local: {
               tryBundle(outputDir, _options) {
-                execSync("yarn generate", {
+                execSync("npm install", {
+                  cwd: "app",
+                  stdio: "inherit",
+                });
+                execSync("npm run generate", {
                   cwd: "app",
                   stdio: "inherit",
                 });

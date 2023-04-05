@@ -1,8 +1,8 @@
 {
-  "name": "ivs-multiple-hosts-example",
+  "name": "ivs-multiple-hosts-web-example",
   "version": "0.1.0",
   "bin": {
-    "ivs-multiple-hosts-example": "bin/ivs-multiple-hosts-example.js"
+    "ivs-multiple-hosts-web-example": "bin/ivs-multiple-hosts-web-example.js"
   },
   "scripts": {
     "build": "tsc",

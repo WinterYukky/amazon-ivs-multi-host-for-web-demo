@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import { IvsMultipleHostsExampleStack } from "../lib/ivs-multiple-hosts-example-stack";
+import { IvsMultipleHostsWebExampleStack } from "../lib/ivs-multiple-hosts-web-example-stack";
 
 const app = new cdk.App();
-new IvsMultipleHostsExampleStack(app, "IvsMultipleHostsExampleStack", {
+new IvsMultipleHostsWebExampleStack(app, "IvsMultipleHostsWebExampleStack", {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
