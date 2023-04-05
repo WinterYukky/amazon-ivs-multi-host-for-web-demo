@@ -19,8 +19,8 @@ This demo is built on AWS CDK and you can build the following demo environment b
 To set up a demonstration environment, run the following commands.
 
 ```bash
-yarn install
-yarn cdk deploy
+npm install
+npm run cdk deploy
 ```
 
 After deploy, you get following values.
@@ -52,5 +52,5 @@ The images above show a screen of the demo app broadcasting (left) and a screen 
 Remove it with the following command.
 
 ```bash
-yarn cdk destroy
+npm run cdk destroy
 ```
