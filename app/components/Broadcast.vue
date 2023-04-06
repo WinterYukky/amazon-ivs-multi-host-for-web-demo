@@ -46,26 +46,28 @@ onMounted(async () => {
       return [audioTrack, videoTrack];
     },
     shouldPublishParticipant(participant) {
-      participants.push(participant);
       return true;
     },
     shouldSubscribeToParticipant(participant) {
       return SubscribeType.AUDIO_VIDEO;
     },
   });
-  await stage.join();
-
-  client.addVideoInputDevice(stream, `video-${participants[0].id}`, {
-    index: 0, // only 'index' is required for the position parameter
-    width: streamConfig.maxResolution.width / participants.length,
-  });
-  client.addAudioInputDevice(stream, `audio-${participants[0].id}`);
   client.enableVideo();
   client.enableAudio();
   client.attachPreview(canvas!);
   if (props.streamKey) {
     client.startBroadcast(props.streamKey);
   }
+
+  const refreshVideoPositions = () =>
+    participants.forEach((participant, index) =>
+      client.updateVideoDeviceComposition(`video-${participant.id}`, {
+        index: 0,
+        width: streamConfig.maxResolution.width / participants.length,
+        x: index * (streamConfig.maxResolution.width / participants.length),
+      })
+    );
+
   stage.on(
     StageEvents.STAGE_PARTICIPANT_STREAMS_ADDED,
     async (participant: StageParticipantInfo, streams: StageStream[]) => {
@@ -73,9 +75,9 @@ onMounted(async () => {
 
       // add participants to broadcast
       participants = Array.from(new Set([...participants, participant]));
+
       // wait render video elements that is created by vue
       await nextTick();
-
       const video = videos.find(
         (v) => v.dataset.participantId === participant.id
       );
@@ -88,25 +90,34 @@ onMounted(async () => {
       video.srcObject = new MediaStream(
         streamsToDisplay.map((stream) => stream.mediaStreamTrack)
       );
-      // need to play
+      // require to call before addVideoInputDevice
       await video.play();
-      client.addImageSource(video, `video-${participant.id}`, {
-        index: 1,
-        width: streamConfig.maxResolution.width / participants.length,
-        x: streamConfig.maxResolution.width / participants.length,
-      });
-      streams
-        .filter((stream) => stream.streamType === StreamType.AUDIO)
-        .forEach((stream) =>
-          client.addAudioInputDevice(
-            new MediaStream([stream.mediaStreamTrack]),
-            `audio-${participant.id}`
-          )
-        );
-      client.updateVideoDeviceComposition(`video-${participants[0].id}`, {
-        index: 0,
-        width: streamConfig.maxResolution.width / participants.length,
-      });
+      await Promise.all([
+        ...streams
+          .filter((stream) => stream.streamType === StreamType.VIDEO)
+          .map((stream) =>
+            client.addVideoInputDevice(
+              new MediaStream([stream.mediaStreamTrack]),
+              `video-${participant.id}`,
+              {
+                index: 0,
+                width: streamConfig.maxResolution.width / participants.length,
+                x:
+                  (participants.length - 1) *
+                  (streamConfig.maxResolution.width / participants.length),
+              }
+            )
+          ),
+        ...streams
+          .filter((stream) => stream.streamType === StreamType.AUDIO)
+          .map((stream) =>
+            client.addAudioInputDevice(
+              new MediaStream([stream.mediaStreamTrack]),
+              `audio-${participant.id}`
+            )
+          ),
+      ]);
+      refreshVideoPositions();
     }
   );
   stage.on(
@@ -118,16 +129,9 @@ onMounted(async () => {
       participants = participants.filter(
         (exist) => exist.id !== participant.id
       );
-      client.removeImage(`video-${participant.id}`);
-      await nextTick();
+      client.removeVideoInputDevice(`video-${participant.id}`);
       client.removeAudioInputDevice(`audio-${participant.id}`);
-      participants.forEach((participant, index) =>
-        client.updateVideoDeviceComposition(`video-${participant.id}`, {
-          index: 0,
-          width: streamConfig.maxResolution.width / participants.length,
-          x: index * (streamConfig.maxResolution.width / participants.length),
-        })
-      );
+      refreshVideoPositions();
     }
   );
 
@@ -143,6 +147,7 @@ onMounted(async () => {
       console.log("STAGE_PARTICIPANT_LEFT", participants);
     }
   );
+  await stage.join();
 });
 </script>
 
@@ -154,6 +159,10 @@ onMounted(async () => {
       :data-participant-id="participant.id"
       ref="videos"
       hidden
+      playsinline
+      autoplay
+      muted
+      control
     ></video>
   </div>
 </template>

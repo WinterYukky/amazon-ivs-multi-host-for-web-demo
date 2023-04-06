@@ -5,6 +5,9 @@ const ingestEndpoint = $ref("");
 const stageToken = $ref("");
 const streamKey = $ref<string>();
 const nowPlaying = $ref(false);
+useHead({
+  title: "Amazon IVS Multi-host for Web demo",
+});
 </script>
 
 <template>
@@ -16,12 +19,14 @@ const nowPlaying = $ref(false);
   </header>
   <main class="container">
     <section>
-      <broadcast
-        v-if="nowPlaying"
-        :ingest-endpoint="ingestEndpoint"
-        :stage-token="stageToken"
-        :stream-key="streamKey"
-      ></broadcast>
+      <client-only>
+        <broadcast
+          v-if="nowPlaying"
+          :ingest-endpoint="ingestEndpoint"
+          :stage-token="stageToken"
+          :stream-key="streamKey"
+        ></broadcast>
+      </client-only>
     </section>
     <article>
       <form @submit.prevent="nowPlaying = true">
